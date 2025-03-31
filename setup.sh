@@ -23,9 +23,12 @@ sudo touch /etc/ansible/hosts
 echo "Add localhost to hosts file" 
 printf '[servers]\localhost ansible_connection=local\n' > /etc/ansible/hosts
 
+echo "git macsetup"
+git clone https://github.com/ekn-j/macsetup.git
 
+cd ./macsetup
 
-#echo "Start ansible playbook"
-#ansible-playbook playbook.yml --ask-become-pass
+echo "Start ansible playbook"
+ansible-playbook playbook.yml --ask-become-pass
 
 
