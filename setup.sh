@@ -7,6 +7,9 @@ sudo xcodebuild -license
 echo "Setup HomeBrew"
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
+echo "install git"
+brew install git
+
 echo "install Ansible" 
 brew install ansible
 
@@ -20,5 +23,9 @@ sudo touch /etc/ansible/hosts
 echo "Add localhost to hosts file" 
 printf '[servers]\localhost ansible_connection=local\n' > /etc/ansible/hosts
 
-echo "Start ansible playbook"
-ansible-playbook playbook.yml --ask-become-pass
+
+
+#echo "Start ansible playbook"
+#ansible-playbook playbook.yml --ask-become-pass
+
+

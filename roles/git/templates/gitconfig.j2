@@ -1,0 +1,29 @@
+[user]
+    name = {{ git_user_name }}
+    email = {{ git_user_email }}
+
+[core]
+    editor = {{ git_core_editor }}
+    autocrlf = input
+    excludesfile = ~/.gitignore_global
+
+[init]
+    defaultBranch = {{ git_default_branch }}
+
+[push]
+    default = simple
+
+[pull]
+    rebase = true
+
+[color]
+    ui = auto
+
+[alias]
+    co = checkout
+    ci = commit
+    st = status
+    br = branch
+    hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
+    type = cat-file -t
+    dump = cat-file -p 

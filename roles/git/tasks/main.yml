@@ -1,0 +1,52 @@
+---
+- name: Install Git
+  homebrew:
+    name: git
+    state: present
+
+- name: Ensure SSH directory exists
+  file:
+    path: ~/.ssh
+    state: directory
+    mode: '0700'
+
+- name: Check if SSH key already exists
+  stat:
+    path: "{{ git_ssh_key_path }}"
+  register: ssh_key_exists
+
+- name: Generate SSH key (if doesn't exist)
+  command: "ssh-keygen -t {{ git_ssh_key_type }} -C '{{ git_ssh_key_comment }}' -f {{ git_ssh_key_path }} -N ''"
+  when: not ssh_key_exists.stat.exists
+
+- name: Display SSH public key
+  command: "cat {{ git_ssh_key_path }}.pub"
+  register: ssh_pub_key
+  changed_when: false
+  when: not ssh_key_exists.stat.exists
+
+- name: Show instructions for adding SSH key to GitHub
+  debug:
+    msg: |
+      Your SSH public key has been generated. Add it to your GitHub account:
+      {{ ssh_pub_key.stdout }}
+
+      Go to: https://github.com/settings/keys
+      Click 'New SSH key', paste the above key, and save.
+  when: not ssh_key_exists.stat.exists
+
+- name: Configure global git settings
+  template:
+    src: gitconfig.j2
+    dest: ~/.gitconfig
+    mode: '0644'
+
+- name: Test SSH connection to GitHub
+  command: ssh -T git@github.com
+  register: ssh_test
+  ignore_errors: yes
+  changed_when: false
+
+- name: Display SSH connection test result
+  debug:
+    var: ssh_test.stdout

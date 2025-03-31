@@ -1,0 +1,8 @@
+---
+git_user_name: "ekn-j "
+git_user_email: "johannes3k@gmail.com"
+git_ssh_key_type: "ed25519"  # or "rsa" if you prefer
+git_ssh_key_comment: "{{ git_user_email }}"
+git_ssh_key_path: "~/.ssh/id_{{ git_ssh_key_type }}"
+git_core_editor: "nvim"
+git_default_branch: "main"

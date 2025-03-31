@@ -4,5 +4,6 @@
     name: "{{ item }}"
     state: present
   loop:
-    - git
     - iperf3
+    - fzf
+    
