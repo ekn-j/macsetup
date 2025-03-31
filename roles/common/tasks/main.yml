@@ -1,0 +1,23 @@
+---
+- name: Ensure Homebrew is installed
+  block:
+    - name: Check if Homebrew is installed
+      command: which brew
+      register: brew_installed
+      ignore_errors: yes
+      changed_when: false
+
+    - name: Install Homebrew if not present
+      shell: /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+      when: brew_installed.rc != 0
+
+    - name: Add Homebrew to PATH
+      lineinfile:
+        path: ~/.zshrc
+        line: 'eval "$(/opt/homebrew/bin/brew shellenv)"'
+        create: yes
+      when: brew_installed.rc != 0
+
+- name: Update Homebrew
+  homebrew:
+    update_homebrew: yes

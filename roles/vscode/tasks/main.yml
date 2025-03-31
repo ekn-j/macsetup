@@ -1,0 +1,14 @@
+---
+
+
+- name: Install Visual Studio Code
+  homebrew:
+    name: visual-studio-code
+    state: present
+
+- name: install VScode extenstions
+  command:  code --install-extension {{ item }}
+  loop:
+    - golang.Go
+    - ms-vscode.makefile-tools
+

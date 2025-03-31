@@ -1,0 +1,14 @@
+---
+- name: Install latest Golang
+  homebrew:
+    name: go
+    state: present
+
+- name: Set up Go environment variables
+  blockinfile:
+    path: ~/.zshrc
+    block: |
+      export GOPATH=$HOME/go
+      export PATH=$PATH:$GOPATH/bin
+      export PATH=$PATH:/usr/local/go/bin
+    marker: "# {mark} ANSIBLE MANAGED BLOCK - GOLANG CONFIG"

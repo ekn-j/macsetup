@@ -1,0 +1,19 @@
+---
+- name: Install Neovim
+  homebrew:
+    name: neovim
+    state: present
+
+- name: Create Neovim config directory
+  file:
+    path: ~/.config/nvim
+    state: directory
+
+- name: Clone Neovim config from GitHub
+  git:
+    repo: "https://github.com/yourusername/your-nvim-config.git"
+    dest: ~/.config/nvim
+    clone: yes
+    update: yes
+  when: "'yourusername/your-nvim-config.git' != 'https://github.com/yourusername/your-nvim-config.git'"
+  # Replace the above URL with your actual GitHub repo URL
