@@ -11,9 +11,9 @@
 
 - name: Clone Neovim config from GitHub
   git:
-    repo: "https://github.com/yourusername/your-nvim-config.git"
+    repo: "https://github.com/ekn-j/nvim"
     dest: ~/.config/nvim
     clone: yes
     update: yes
-  when: "'yourusername/your-nvim-config.git' != 'https://github.com/yourusername/your-nvim-config.git'"
+  when: "'ekn-j/nvim.git' != 'https://github.com/ekn-j/nvim'"
   # Replace the above URL with your actual GitHub repo URL
