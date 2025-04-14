@@ -6,4 +6,5 @@
   loop:
     - iperf3
     - fzf
-    
+    - bat
+    - nmap
